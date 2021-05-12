@@ -15,7 +15,7 @@ class Phrase
 
   def word_count 
     result = {}
-    clean_words = @word.gsub(/[^0-9a-z ]/i, '').split(' ').map(&:downcase)
+    clean_words = @word.split(/[,:.!&@$%^&\s]+/).reject(&:empty?).map(&:downcase).map {|w| w.gsub!(/^\'|\'?$/, '') }
     clean_words.each do |word|
       result[word] = clean_words.count(word)
     end
